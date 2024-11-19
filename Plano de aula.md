@@ -1,5 +1,3 @@
----
-
 ### 1. *Introdução à Engenharia de Dados no Contexto Itaú*
 - **Objetivo:** Entender o papel do engenheiro de dados e o ambiente do Itaú.
   - **Conteúdo:**
