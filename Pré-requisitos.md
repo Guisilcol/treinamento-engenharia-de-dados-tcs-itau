@@ -24,3 +24,8 @@ Para garantir o melhor aproveitamento do curso, os participantes devem atender a
 
 5. **Conhecimento Básico em Cloud Computing (Desejável)**  
    - Familiaridade com conceitos de nuvem, como armazenamento (ex.: buckets) e serviços computacionais. Experiência prévia com AWS é um diferencial, mas não obrigatório.
+
+### **Cursos recomendados**
+
+- https://tcsglobal.udemy.com/course/sqlite-for-beginners/ (SQL)
+- https://tcsglobal.udemy.com/course/complete-python-bootcamp/ (Python)
