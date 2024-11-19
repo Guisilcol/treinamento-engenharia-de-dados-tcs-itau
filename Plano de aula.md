@@ -1,9 +1,10 @@
 ### 1. *Introdução à Engenharia de Dados no Contexto Itaú*
 - **Objetivo:** Entender o papel do engenheiro de dados e o ambiente do Itaú.
   - **Conteúdo:**
-    - Visão geral do fluxo de dados no Itaú e introdução ao Datamesh.
+    - Visão geral do fluxo de dados no Itaú e breve introdução introdução a Engenharia da dados e Datamesh.
     - Engenharia de Software X Engenharia de Dados: diferenças e como uma complementa a outra.
-    - Responsabilidades de um engenheiro de dados no contexto de uma instituição financeira.
+    - Ferramentas e tecnologias utilizadas no Itaú para Engenharia de Dados.
+    - Responsabilidades de um engenheiro de dados no contexto do Itaú.
   - **Atividade:** Discussão sobre como os dados são usados no Itaú para tomada de decisão e conformidade.
 
 ---
@@ -13,7 +14,7 @@
   - **Conteúdo:**
     - Consultas SQL básicas e avançadas.
     - Operações de transformação e limpeza de dados com SQL.
-    - Introdução ao DuckDB e como ele pode ser utilizado em pipelines de dados.
+    - Introdução ao SQLITE3, DuckDB e como ele pode ser utilizado em pipelines de dados.
     - Integração do SQL com Python, DuckDB e PySpark.
     - Introdução ao Athena como ferramenta principal de consulta no Datamesh.
   - **Atividade:** Exercícios práticos de SQL com amostras de dados reais.
