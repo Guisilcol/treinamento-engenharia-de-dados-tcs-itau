@@ -1,3 +1,6 @@
+
+
+
 # O que é um DataFrame?
 Um DataFrame é como uma "super tabela" que ajuda a organizar e manipular dados de forma eficiente em Python. Ele é uma das estruturas de dados fundamentais na análise e engenharia de dados, tornando as tarefas mais intuitivas e produtivas.
 
