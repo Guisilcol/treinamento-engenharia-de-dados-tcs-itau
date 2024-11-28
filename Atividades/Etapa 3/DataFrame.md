@@ -35,9 +35,9 @@ for linha in dados:
     medias[regiao]["total"] += vendas
     medias[regiao]["qtd"] += 1
 
-    for regiao, valores in medias.items():
-        media = valores["total"] / valores["qtd"]
-        print(f"Média de vendas na região {regiao}: {media}")
+for regiao, valores in medias.items():
+    media = valores["total"] / valores["qtd"]
+    print(f"Média de vendas na região {regiao}: {media}")
 ```
 
 Exemplo com Pandas:
