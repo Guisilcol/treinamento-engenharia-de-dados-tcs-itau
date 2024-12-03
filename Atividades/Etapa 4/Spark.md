@@ -1,18 +1,20 @@
 # **Introdução ao Apache Spark e seu Funcionamento**
 
-O **Apache Spark** é como um supercérebro para processar dados. Ele foi projetado para lidar com grandes volumes de informações de forma rápida e eficiente. Vamos explorar sua estrutura, seus componentes principais e como ele pode ajudar em tarefas do dia a dia, como criar relatórios ou detectar padrões em dados gigantes.
+O **Apache Spark** é como um supercérebro para processar dados. Ele foi projetado para lidar com grandes volumes de informações de forma rápida e eficiente. Vamos explorar sua estrutura, seus componentes principais e como ele pode ajudar em tarefas do dia a dia.
 
 ---
 
 ## **Como o Spark Funciona?**
 
-Imagine que você precisa processar toneladas de informações, mas fazer isso sozinho seria impossível. O Spark divide essa tarefa em pedaços menores e os distribui para várias máquinas (os "nós" de um cluster), que trabalham em paralelo. Agora, vamos entender os conceitos principais que fazem isso acontecer:
+Imagine que você precisa processar toneladas de informações, isto é, Terabytes de dados, mas fazer isso sozinho seria impossível. O Spark divide essa tarefa em pedaços menores e os distribui para várias máquinas (os "nós" de um cluster), que trabalham em paralelo. Agora, vamos entender os conceitos principais que fazem isso acontecer:
 
 ### **1. RDD (Resilient Distributed Dataset)**
 
 Os **RDDs** são como blocos básicos de dados no Spark. Eles guardam as informações de forma distribuída (em várias máquinas) e são resistentes a falhas. Se um pedaço de dado for perdido, o Spark consegue recriá-lo automaticamente.
 
 - Exemplo simples: imagine uma lista de números. O Spark pode dividi-la em partes e cada máquina processa um pedaço, somando ou filtrando os números.
+
+A API de DataFrame no Apache Spark foi construída sobre a API de RDDs Enquanto os RDDs são a fundação do Spark, fornecendo flexibilidade e controle de baixo nível, os DataFrames foram criados para simplificar e otimizar o processamento de dados estruturados e semiestruturados.
 
 ### **2. DAG (Directed Acyclic Graph)**
 
