@@ -7,6 +7,7 @@
     - Responsabilidades de um engenheiro de dados no contexto do Itaú.
   - **Atividade:** Discussão sobre como os dados são usados no Itaú para tomada de decisão e conformidade.
 - **Carga Horária:** 1h de conversa
+- **Ambiente recomendado:** Máquina pessoal
 
 ---
 
@@ -20,6 +21,7 @@
     - Introdução ao Athena como ferramenta principal de consulta no Datamesh.
   - **Atividade:** Exercícios práticos de SQL com amostras de dados.
 - **Carga Horária:** 1h de teoria e 2h de prática/apoio
+- **Ambiente recomendado:** Máquina pessoal
 
 ---
 
@@ -31,6 +33,7 @@
     - Testes unitários: como garantir a qualidade do código mesmo em pipelines de dados.
   - **Atividade:** Criação de scripts Python para manipulação básica de dados e testes unitários.
 - **Carga Horária:** 1h de teoria e 2h de prática/apoio
+- **Ambiente recomendado:** Máquina pessoal
 
 ---
 
@@ -43,6 +46,7 @@
     - Manipulação de grandes volumes de dados com PySpark.
   - **Atividade:** Exercícios de manipulação de dados com DataFrames em PySpark.
 - **Carga Horária:** 1h de teoria + 2h de prática/apoio
+- **Ambiente recomendado:** Máquina pessoal
 
 ---
 
@@ -54,6 +58,7 @@
     - Introdução às Step Functions para orquestração de workflows complexos.
   - **Atividade:** Criação de um pipeline ETL completo com Glue, integrado a uma Step Function para monitoramento do fluxo.
 - **Carga Horária:** 1h30m de teoria + 3h de prática/apoio
+- **Ambiente recomendado:** Máquina pessoal
 ---
 
 ### 6. *Arquitetura de Dados no Itaú: DataMesh e AWS*
@@ -64,6 +69,7 @@
     - Particionamento, versionamento e gerenciamento de dados no AWS.
   - **Atividade:** Exercício prático de modelagem de dados para um cenário do Itaú.
 - **Carga Horária:** 1h de teoria + 3h de prática/apoio
+- **Ambiente recomendado:** Máquina pessoal
 
 ---
 
@@ -76,6 +82,7 @@
     - Como criar ambientes replicáveis para desenvolvimento e produção.
   - **Atividade:** Configuração de buckets S3 e permissões usando Terraform.
 - **Carga Horária:** 1h de teoria + 4h de prática/apoio
+- **Ambiente recomendado:** Maquina ITAU
 
 ---
 
@@ -86,6 +93,7 @@
     - Validação e conformidade com LGPD em pipelines de dados.
   - **Atividade:** Configuração de rotinas de validação de qualidade e conformidade em um pipeline.
 - **Carga Horária:** 1h de teoria + 2h de prática/apoio
+- **Ambiente recomendado:** Máquina ITAU
 ---
 
 ### 9. *Projeto Final e Integração de Conceitos*
@@ -97,5 +105,11 @@
     - Documentação, monitoramento e ajuste do pipeline.
   - **Atividade:** Projeto de dados integrando Python, PySpark, Glue, Terraform e monitoramento com Glue Data Quality.
 - **Carga Horária:** 13h30m de prática/apoio
+- **Ambiente recomendado:** Máquina pessoal
 
 ---
+
+### 10. *Integração total com o ambiente ITAU: como criar repositórios, lidar com as esteiras CI/CD etc.*
+- **Objetivo:**: Introduzir as pessoas que não estão no Ambiente Itau o básico da infraestrutura e padrões estabelecidos pela corporação.
+- **Ambiente recomendado:** Máquina ITAU
+- **Carga Horária:** Será feito durante horário de trabalho. 
