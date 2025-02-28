@@ -1,7 +1,6 @@
-
 # Tutorial de Validação do Ambiente para Treinamento
 
-Este tutorial orienta o aluno na instalação e validação dos componentes necessários para o treinamento, abrangendo a instalação do Java, Apache Spark (incluindo a configuração para o Spark Connect com winutils no Windows) e Python + PySpark.
+Este tutorial orienta o aluno na instalação e validação dos componentes necessários para o treinamento, abrangendo a instalação do Java, Apache Spark (incluindo a configuração para o Spark Connect com winutils no Windows) e Python 3.11 + PySpark.
 
 ---
 
@@ -11,17 +10,17 @@ O Apache Spark depende do Java (JDK) para funcionar. Recomenda-se o uso do JDK 1
 
 ### 1.1. Windows
 
-1. **Download do JDK:**  
-   Acesse o site oficial do [Adoptium](https://adoptium.net) ou da [Oracle](https://www.oracle.com/java/technologies/downloads/) e baixe a versão adequada do JDK (preferencialmente JDK 11).
+1. **Download do JDK 11:**  
+   Baixe o JDK 11 no site oficial do [Adoptium - OpenJDK 11](https://adoptium.net/?variant=openjdk11) ou da [Oracle](https://www.oracle.com/java/technologies/downloads/). Recomenda-se o uso do Adoptium.
 
 2. **Instalação:**  
    Execute o instalador e siga as instruções.
 
-3. **Configuração da variável JAVA_HOME:**  
+3. **Configuração da variável JAVA_HOME (variáveis de SISTEMA):**  
    - Clique com o botão direito em "Este Computador" e selecione **Propriedades**.  
-   - Vá em **Configurações Avançadas do Sistema** > **Variáveis de Ambiente**.  
+   - Vá em **Configurações Avançadas do Sistema** > **Variáveis de Ambiente**.
    - Crie ou edite a variável `JAVA_HOME` apontando para o diretório de instalação do JDK (por exemplo, `C:\Program Files\Java\jdk-11.0.x`).  
-   - Adicione `%JAVA_HOME%\bin` à variável `PATH`.
+   - Adicione `%JAVA_HOME%\bin` à variável `PATH` (variável de SISTEMA).
 
 4. **Validação:**  
    Abra o **Prompt de Comando** e execute:
@@ -32,17 +31,21 @@ O Apache Spark depende do Java (JDK) para funcionar. Recomenda-se o uso do JDK 1
 
 ### 1.2. Linux (Debian/Ubuntu)
 
-1. Atualize a lista de pacotes:
+1. **Download e Instalação:**  
+   O JDK 11 pode ser instalado diretamente dos repositórios oficiais. Para garantir o acesso à versão mais recente do OpenJDK 11, se necessário, adicione o PPA do [Adoptium](https://adoptium.net/?variant=openjdk11):
    ```bash
    sudo apt update
+   sudo apt install openjdk-11-jdk
    ```
-
-2. Instale o OpenJDK 11:
+   *Alternativamente, caso sua distribuição não possua a versão 11, considere utilizar o PPA:*
    ```bash
+   sudo add-apt-repository ppa:openjdk-r/ppa
+   sudo apt update
    sudo apt install openjdk-11-jdk
    ```
 
-3. Valide a instalação:
+2. **Validação:**  
+   Execute:
    ```bash
    java -version
    ```
@@ -51,14 +54,16 @@ O Apache Spark depende do Java (JDK) para funcionar. Recomenda-se o uso do JDK 1
 
 ## 2. Instalação do Apache Spark
 
-Utilize a versão pré-compilada do Spark para facilitar a instalação. Recomenda-se uma versão compatível com Hadoop 3.3, que também assegura o suporte ao Spark Connect.
+Utilize a versão pré-compilada do Spark para facilitar a instalação. Recomenda-se a versão compatível com Hadoop 3.3, que também assegura o suporte ao Spark Connect.
 
 ### 2.1. Download e Extração
 
-1. Acesse a página oficial do [Apache Spark](https://spark.apache.org/downloads.html).  
-2. Selecione a versão pré-compilada para **Hadoop 3.3**.  
-3. Faça o download do arquivo compactado e extraia-o para um diretório, por exemplo:
+1. **Download:**  
+   Faça o download direto do arquivo utilizando o link:  
+   [https://www.apache.org/dyn/closer.lua/spark/spark-3.5.5/spark-3.5.5-bin-hadoop3.tgz](https://www.apache.org/dyn/closer.lua/spark/spark-3.5.5/spark-3.5.5-bin-hadoop3.tgz)
 
+2. **Extração:**  
+   Extraia o arquivo baixado para um diretório, por exemplo:
    - **Windows:** `C:\spark`
    - **Linux:** `/opt/spark`
 
@@ -68,20 +73,21 @@ Utilize a versão pré-compilada do Spark para facilitar a instalação. Recomen
 
 1. **Variáveis de Ambiente:**  
    - Configure a variável `SPARK_HOME` apontando para o diretório onde o Spark foi extraído (ex.: `C:\spark`).  
-   - Adicione `%SPARK_HOME%\bin` à variável `PATH`.
+   - **Altere as variáveis de SISTEMA** para garantir que todos os usuários possam acessar a configuração.  
+   - Adicione `%SPARK_HOME%\bin` à variável `PATH` (variável de SISTEMA).
 
 2. **Integração do winutils.exe:**  
-   O Spark no Windows pode depender do `winutils.exe` para executar certas funcionalidades relacionadas ao Hadoop. Para Spark pré-compilado para Hadoop 3.3, baixe o winutils compatível:
-   - **Link para download:** [winutils para Hadoop 3.3](https://github.com/kontext-tech/winutils/tree/master/hadoop-3.3.1/bin) ou [link direto](blob:https://github.com/ace6b6f0-e318-4150-bd58-572f4b35cf0f)
-   - Baixe o `winutils.exe` e coloque-o em um diretório, por exemplo: `C:\hadoop\bin`.
-   - Configure a variável de ambiente `HADOOP_HOME` para o diretório raiz (ex.: `C:\hadoop`) e adicione `%HADOOP_HOME%\bin` ao `PATH`.
+   O Spark no Windows depende do `winutils.exe` e `hadoop.dll` para executar funcionalidades relacionadas ao Hadoop. Para Spark pré-compilado para Hadoop 3.3, baixe o winutils compatível:
+   - **Link para download:** [winutils para Hadoop 3.3](https://github.com/kontext-tech/winutils/tree/master/hadoop-3.3.1/bin)
+   - Baixe o `winutils.exe` e `hadoop.dll` e os coloque em um diretório, por exemplo: `C:\hadoop\bin`.
+   - Configure a variável de ambiente `HADOOP_HOME` para o diretório raiz (ex.: `C:\hadoop`) e adicione `%HADOOP_HOME%\bin` à variável `PATH` (variável de SISTEMA).
 
 #### Linux
 
 1. Extraia o arquivo para o diretório desejado:
    ```bash
    sudo mkdir -p /opt/spark
-   sudo tar -xzf spark-*.tgz -C /opt/spark --strip-components=1
+   sudo tar -xzf spark-3.5.5-bin-hadoop3.tgz -C /opt/spark --strip-components=1
    ```
 2. Configure a variável `SPARK_HOME` adicionando as seguintes linhas ao arquivo `~/.bashrc` (ou equivalente):
    ```bash
@@ -107,32 +113,39 @@ para confirmar que o Spark foi instalado corretamente.
 
 ---
 
-## 3. Instalação do Python e PySpark
+## 3. Instalação do Python 3.11 e PySpark
 
-### 3.1. Instalação do Python
+### 3.1. Instalação do Python 3.11
 
 #### Windows
 
-1. Baixe o instalador do [Python](https://www.python.org/downloads/) e execute-o.
+1. **Download do Python 3.11:**  
+   Baixe o instalador do [Python 3.11](https://www.python.org/downloads/release/python-3110/) e execute-o.
 2. Durante a instalação, marque a opção **"Add Python to PATH"**.
 3. Verifique a instalação abrindo o **Prompt de Comando** e digitando:
    ```bash
    python --version
    ```
 
-#### Linux
+#### Linux (Debian/Ubuntu)
 
-Caso o Python não esteja instalado, use (para distribuições baseadas em Debian):
+Caso o Python 3.11 não esteja disponível por padrão, adicione o PPA dos deadsnakes e instale:
 ```bash
-sudo apt install python3 python3-pip
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install python3.11 python3.11-venv python3.11-dev
+```
+Verifique a instalação:
+```bash
+python3.11 --version
 ```
 
 ### 3.2. Instalação do PySpark e Início do Python
 
 1. **Instalação do PySpark:**  
-   Abra o **Prompt de Comando** (no Windows) ou o **Terminal** (no Linux) e execute o comando:
+   Abra o **Prompt de Comando** (no Windows) ou o **Terminal** (no Linux) e execute:
    ```bash
-   pip install pyspark
+   pip install pyspark[connect]==3.5.0
    ```
    Esse comando fará o download e a instalação do PySpark e suas dependências.
 
@@ -140,26 +153,26 @@ sudo apt install python3 python3-pip
 
    - **Windows:**
      1. Abra o **Prompt de Comando** (pressione `Win + R`, digite `cmd` e pressione Enter).
-     2. No prompt, digite o comando abaixo para iniciar o interpretador Python:
+     2. No prompt, digite:
         ```bash
         python
         ```
-     3. Dentro do interpretador Python, você verá um prompt interativo (geralmente `>>>`). Digite:
+     3. No interpretador Python (prompt `>>>`), digite:
         ```python
         import pyspark
         print(pyspark.__version__)
         ```
      4. Se a versão do PySpark for exibida sem erros, a instalação está correta.
-     5. Para sair do interpretador Python, digite:
+     5. Para sair do interpretador, digite:
         ```python
         exit()
         ```
      
    - **Linux:**
      1. Abra o **Terminal**.
-     2. Digite o comando para iniciar o Python:
+     2. Digite:
         ```bash
-        python3
+        python3.11
         ```
      3. No prompt interativo, digite:
         ```python
@@ -179,7 +192,7 @@ sudo apt install python3 python3-pip
 O Spark Connect permite que aplicações se conectem remotamente ao cluster Spark. Para assegurar a compatibilidade:
 
 1. **Verifique as Variáveis de Ambiente:**  
-   Confirme que `JAVA_HOME`, `SPARK_HOME` e (no Windows) `HADOOP_HOME` estão configurados corretamente.
+   Confirme que `JAVA_HOME`, `SPARK_HOME` e (no Windows) `HADOOP_HOME` estão configurados corretamente nas variáveis de SISTEMA.
 
 2. **Teste a Conexão via PySpark:**  
    Crie um script Python para testar a conexão com o Spark:
@@ -230,9 +243,52 @@ Após a instalação e configuração, valide cada componente:
 
 ---
 
-## 6. Script de Teste para Validação do Código Spark
+## 6. Inicialização do Spark Connect
 
-A seguir, um script em Python que gera uma massa de dados (arquivo com no mínimo 100 MB), lê essa massa via PySpark e carrega os dados em uma tabela particionada no catálogo utilizando arquivos no formato PARQUET.
+Antes de executar o script de teste, é necessário iniciar o server do Spark Connect. Utilize os arquivos abaixo conforme o seu sistema operacional para iniciar o serviço, garantindo que variáveis importantes, como a **PYSPARK_PYTHON**, estejam configuradas.
+
+### 6.1. Arquivo BAT para Windows (start_spark_connect.bat)
+
+```bat
+@echo off
+REM Configura a variável PYSPARK_PYTHON para garantir o uso do Python 3.11
+set PYSPARK_PYTHON=python
+REM Define a variável SPARK_HOME, se ainda não estiver definida
+if not defined SPARK_HOME set SPARK_HOME=C:\spark
+REM Inicia o Spark Connect server
+%SPARK_HOME%\bin\spark-connect.cmd
+pause
+```
+
+### 6.2. Script Shell para Linux (start_spark_connect.sh)
+
+```bash
+#!/bin/bash
+# Configura a variável PYSPARK_PYTHON para garantir o uso do Python 3.11
+export PYSPARK_PYTHON=python3.11
+# Define a variável SPARK_HOME, se ainda não estiver definida
+[ -z "$SPARK_HOME" ] && export SPARK_HOME=/opt/spark
+# Inicia o Spark Connect server
+$SPARK_HOME/bin/spark-connect
+```
+
+*Após criar o arquivo, torne-o executável (no Linux):*
+```bash
+chmod +x start_spark_connect.sh
+```
+
+*Para iniciar o Spark Connect, execute o arquivo correspondente:*
+- **Windows:** Dê um duplo clique no `start_spark_connect.bat` ou execute-o via Prompt de Comando.
+- **Linux:** Execute no terminal:
+  ```bash
+  ./start_spark_connect.sh
+  ```
+
+---
+
+## 7. Script de Teste para Validação do Código Spark
+
+A seguir, um script em Python que gera uma massa de dados (arquivo com no mínimo 100 MB), lê essa massa via PySpark e carrega os dados em uma tabela particionada no catálogo utilizando arquivos no formato PARQUET. **Atenção:** Certifique-se de que o Spark Connect server esteja iniciado (veja a seção 6) antes de executar este script.
 
 ```python
 # script_teste_spark.py
@@ -245,13 +301,13 @@ def random_string(n=200):
     """Gera uma string aleatória de n caracteres."""
     return ''.join(random.choices(string.ascii_letters + string.digits, k=n))
 
-# Registra a UDF para gerar strings aleatórias
-random_string_udf = udf(lambda: random_string(), StringType())
-
 # Inicializa a sessão Spark
 spark = SparkSession.builder \
     .appName("TesteMassaDeDados") \
     .getOrCreate()
+
+# Registra a UDF para gerar strings aleatórias
+random_string_udf = udf(lambda: random_string(), StringType())
 
 # Gera um DataFrame com 1 milhão de linhas e uma coluna de string de 200 caracteres.
 # Isso garante que o arquivo gerado seja, no mínimo, 100 MB.
@@ -275,9 +331,9 @@ print("Script executado com sucesso. Tabela 'test_table' criada no banco 'test_d
 spark.stop()
 ```
 
-### 6.1. Como Executar o Script de Teste
+### 7.1. Como Executar o Script de Teste
 
-1. **Certifique-se de que o ambiente está configurado conforme as seções anteriores.**
+1. **Certifique-se de que o ambiente está configurado conforme as seções anteriores e que o Spark Connect server está iniciado (veja a seção 6).**
 2. Salve o script acima em um arquivo chamado `script_teste_spark.py`.
 3. Abra o **Prompt de Comando** (no Windows) ou o **Terminal** (no Linux).
 4. Navegue até o diretório onde o arquivo `script_teste_spark.py` foi salvo.
