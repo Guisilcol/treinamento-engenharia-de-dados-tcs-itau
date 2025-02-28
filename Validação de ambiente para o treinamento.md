@@ -75,6 +75,7 @@ Utilize a versão pré-compilada do Spark para facilitar a instalação. Recomen
    - Configure a variável `SPARK_HOME` apontando para o diretório onde o Spark foi extraído (ex.: `C:\spark`).  
    - **Altere as variáveis de SISTEMA** para garantir que todos os usuários possam acessar a configuração.  
    - Adicione `%SPARK_HOME%\bin` à variável `PATH` (variável de SISTEMA).
+   - Configure a variável `PYSPARK_PYTHON` com o valor "python"
 
 2. **Integração do winutils.exe:**  
    O Spark no Windows depende do `winutils.exe` e `hadoop.dll` para executar funcionalidades relacionadas ao Hadoop. Para Spark pré-compilado para Hadoop 3.3, baixe o winutils compatível:
@@ -192,7 +193,7 @@ python3.11 --version
 O Spark Connect permite que aplicações se conectem remotamente ao cluster Spark. Para assegurar a compatibilidade:
 
 1. **Verifique as Variáveis de Ambiente:**  
-   Confirme que `JAVA_HOME`, `SPARK_HOME` e (no Windows) `HADOOP_HOME` estão configurados corretamente nas variáveis de SISTEMA.
+   Confirme que `JAVA_HOME`, `SPARK_HOME`, `PYSPARK_PYTHON` e (no Windows) `HADOOP_HOME` estão configurados corretamente nas variáveis de SISTEMA.
 
 2. **Teste a Conexão via PySpark:**  
    Crie um script Python para testar a conexão com o Spark:
@@ -245,18 +246,13 @@ Após a instalação e configuração, valide cada componente:
 
 ## 6. Inicialização do Spark Connect
 
-Antes de executar o script de teste, é necessário iniciar o server do Spark Connect. Utilize os arquivos abaixo conforme o seu sistema operacional para iniciar o serviço, garantindo que variáveis importantes, como a **PYSPARK_PYTHON**, estejam configuradas.
-
 ### 6.1. Arquivo BAT para Windows (start_spark_connect.bat)
 
 ```bat
 @echo off
-REM Configura a variável PYSPARK_PYTHON para garantir o uso do Python 3.11
-set PYSPARK_PYTHON=python
-REM Define a variável SPARK_HOME, se ainda não estiver definida
-if not defined SPARK_HOME set SPARK_HOME=C:\spark
 REM Inicia o Spark Connect server
-%SPARK_HOME%\bin\spark-connect.cmd
+set CLASS="org.apache.spark.sql.connect.service.SparkConnectServer"
+spark-submit --class %CLASS% --name "Spark Connect server" --packages org.apache.spark:spark-connect_2.12:3.5.5
 pause
 ```
 
@@ -264,12 +260,17 @@ pause
 
 ```bash
 #!/bin/bash
-# Configura a variável PYSPARK_PYTHON para garantir o uso do Python 3.11
-export PYSPARK_PYTHON=python3.11
-# Define a variável SPARK_HOME, se ainda não estiver definida
-[ -z "$SPARK_HOME" ] && export SPARK_HOME=/opt/spark
+# Configura a variável PYSPARK_PYTHON a nível de usuário
+export PYSPARK_PYTHON=python
 # Inicia o Spark Connect server
-$SPARK_HOME/bin/spark-connect
+$SPARK_HOME/sbin/start-connect-server.sh --packages org.apache.spark:spark-connect_2.12:3.5.5
+```
+
+Para finalizar o processo no Linux, utilize o seguinte script:
+
+```bash
+#!/bin/bash
+$SPARK_HOME/sbin/stop-connect-server.sh
 ```
 
 *Após criar o arquivo, torne-o executável (no Linux):*
@@ -304,6 +305,8 @@ def random_string(n=200):
 # Inicializa a sessão Spark
 spark = SparkSession.builder \
     .appName("TesteMassaDeDados") \
+    .enableHiveSupport() \
+    .master("local[*]") \
     .getOrCreate()
 
 # Registra a UDF para gerar strings aleatórias
@@ -316,16 +319,18 @@ df = spark.range(0, 1000000) \
     .withColumn("partition_col", (col("id") % 10))
 
 # Caminho de saída para salvar os dados em formato PARQUET particionado
-output_path = "data_parquet"
+output_path = "./data_parquet"
 
 # Salva o DataFrame como arquivos PARQUET particionados pela coluna 'partition_col'
 df.write.partitionBy("partition_col").mode("overwrite").parquet(output_path)
 
+# Lê os arquivos gerados e exibe as primeiras 5 linhas
+spark.read.parquet(output_path).show(5)
+
 # Cria uma base de dados e uma tabela no catálogo apontando para os arquivos gerados
-spark.sql("CREATE DATABASE IF NOT EXISTS test_db")
-spark.sql("USE test_db")
-spark.sql("DROP TABLE IF EXISTS test_table")
-spark.sql(f"CREATE TABLE test_table USING PARQUET LOCATION '{output_path}'")
+df.write.saveAsTable("test_db.test_table", format="parquet", mode="overwrite", partitionBy="partition_col")
+df = spark.read.table("test_db.test_table")
+df.show(5)
 
 print("Script executado com sucesso. Tabela 'test_table' criada no banco 'test_db'.")
 spark.stop()
