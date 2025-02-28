@@ -75,7 +75,7 @@ Utilize a versão pré-compilada do Spark para facilitar a instalação. Recomen
    - Configure a variável `SPARK_HOME` apontando para o diretório onde o Spark foi extraído (ex.: `C:\spark`).  
    - **Altere as variáveis de SISTEMA** para garantir que todos os usuários possam acessar a configuração.  
    - Adicione `%SPARK_HOME%\bin` à variável `PATH` (variável de SISTEMA).
-   - Configure a variável `PYSPARK_PYTHON` com o valor "python"
+   - Configure a variável `PYSPARK_PYTHON` com o valor "python" (variável de SISTEMA)
 
 2. **Integração do winutils.exe:**  
    O Spark no Windows depende do `winutils.exe` e `hadoop.dll` para executar funcionalidades relacionadas ao Hadoop. Para Spark pré-compilado para Hadoop 3.3, baixe o winutils compatível:
