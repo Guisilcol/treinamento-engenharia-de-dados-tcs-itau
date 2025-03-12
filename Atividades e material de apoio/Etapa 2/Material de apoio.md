@@ -147,14 +147,3 @@ FROM Pedidos;
 **Explicação do exemplo:**  
 - **LAG(valor):** Recupera o valor da linha anterior.
 - **OVER (PARTITION BY id_cliente ORDER BY data_pedido):** Define a "janela" para cada cliente, ordenando os pedidos pela data. Assim, cada linha pode comparar seu valor com o valor do pedido imediatamente anterior do mesmo cliente.
-
----
-
-## Conclusão
-
-Este material de apoio demonstrou como utilizar os principais comandos e funções do SQL usando o SQLite como exemplo.  
-- **SELECT** e **FROM** definem as colunas e a origem dos dados.  
-- **WHERE** permite filtrar registros conforme condições específicas.  
-- Funções de transformação são úteis para modificar os dados na consulta.  
-- **GROUP BY** e **HAVING** possibilitam a agregação e filtragem de grupos de dados.  
-- **CTE** facilita a organização de consultas complexas e **Window Functions** possibilitam análises avançadas sem perder a granularidade dos dados.
