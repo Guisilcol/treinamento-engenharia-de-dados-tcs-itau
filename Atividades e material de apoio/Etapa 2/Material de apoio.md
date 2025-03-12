@@ -27,7 +27,6 @@ Os joins precisam ter uma ou mais colunas de valores em comum para conseguir jun
 
 **Exemplo:**  
 ```sql
--- Seleciona os nomes dos clientes e suas cidades a partir da tabela Clientes
 -- Seleciona os nomes dos clientes, suas cidades e o valor dos pedidos
 SELECT 
     c.nome, 
