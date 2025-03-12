@@ -80,7 +80,7 @@
     - Provisionamento de infraestrutura AWS: S3, Glue e Step Functions.
     - Práticas de versionamento e reutilização de módulos no Terraform.
     - Como criar ambientes replicáveis para desenvolvimento e produção.
-  - **Atividade:** Configuração de buckets S3 e permissões usando Terraform.
+  - **Atividade:** Migrar todos os recursos da atividade 5 para Terraform. 
 - **Carga Horária:** 1h de teoria + 4h de prática/apoio
 - **Ambiente recomendado:** Maquina ITAU
 
