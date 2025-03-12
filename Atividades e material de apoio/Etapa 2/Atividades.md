@@ -31,3 +31,6 @@ Objetivo: Introduzir os conceitos fundamentais de SQL e praticar a manipulação
 
 ## Atividade 10
 - Número de pedidos por cliente, considerando apenas aqueles com mais de 1 pedido
+
+## Atividade 11 
+- Calcular para cada cliente a quantidade de dias entre um pedido e o pedido imediatamente anterior 
