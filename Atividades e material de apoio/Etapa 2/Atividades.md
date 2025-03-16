@@ -34,3 +34,14 @@ Objetivo: Introduzir os conceitos fundamentais de SQL e praticar a manipulação
 
 ## Atividade 11 
 - Calcular para cada cliente a quantidade de dias entre um pedido e o pedido imediatamente anterior 
+
+## Atividade 12 
+- Crie uma consulta que retorne um relatórios contedo as seguintes colunas (obs: use o padrão que preferir para nomear as colunas):
+    - ID do cliente 
+    - Nome do cliente
+    - Cidade do cliente 
+    - ID do pedido 
+    - Data do pedido 
+    - Valor do pedido 
+    - Preço do pedido sem desconto (pode ser recuperado somando a coluna "preço" de cada produto dentro do pedido)
+    - Quantidade de dias entre o pedido e seu pedido imediatamente anterior
