@@ -1,0 +1,41 @@
+erDiagram
+    USER {
+        int id PK
+        string name
+        string email
+        string phone
+        string birth_date
+        string creation_date
+    }
+    
+    PRODUCT {
+        int id PK
+        string name
+        string description
+        float price
+        string category
+        int stock
+        string creation_date
+    }
+    
+    ORDER {
+        int id PK
+        int user_id FK
+        string order_date
+        string status
+        float total_value
+        string creation_date
+    }
+    
+    ORDER_ITEM {
+        int id PK
+        int order_id FK
+        int product_id FK
+        int quantity
+        float unit_price
+        string creation_date
+    }
+    
+    USER ||--o{ ORDER : places
+    ORDER ||--o{ ORDER_ITEM : contains
+    PRODUCT ||--o{ ORDER_ITEM : included_in
