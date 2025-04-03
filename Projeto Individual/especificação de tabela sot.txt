@@ -1,0 +1,9 @@
+Criar uma tabela que contenha: 
+    - o nome e email do usuário
+    - o rank do usuário de acordo com o total já gasto por ele em compras 
+    - id do pedido, data do pedido, nome do produto, quantidade comprada do produto, preço unitario do produto, categoria do produto
+
+abrangir SOMENTE pedidos que foram ENTREGUES (delivered), APROVADOS (approved) ou ENVIADO (shipped)
+usar nomes em PORTUGUES tanto para o nome da tabela, nome das colunas e do proprio dado, como por exemplo, status em approved precisam estar na tabela como "APROVADO"
+
+
